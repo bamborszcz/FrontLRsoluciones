@@ -1,0 +1,26 @@
+<p class="toggle">
+  <button class="btn" style="color: #00AEEA; margin-top: 5%; border-radius: 30%;" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+     <i class="fas fa-bars"></i>
+  </button>
+</p>
+<div class="collapse" id="collapseExample" *ngIf="mostrarBotonesCel()" style="transition: 1000ms;">
+  <div id="contenedorBotones">
+   <button class="col-md-4" id="empresa" [style.background-color]= "getHoverEmpresa()==true  ? '#00AEEA' : 'transparent' " [style.color]= "getHoverEmpresa()==true ? 'white' : '#00AEEA'" style="background-color: transparent; color: #00AEEA;" (click)="this.empresa()">Empresa</button>
+
+    <button class="col-md-4" id="productos" [style.background-color]= "getHoverProductos()==true  ? '#00AEEA' : 'transparent' " [style.color]= "getHoverProductos()==true ? 'white' : '#00AEEA'" style="background-color: transparent; color: #00AEEA;"(click)="this.productos()">Productos</button>
+
+    <button class="col-md-4" id="contacto" [style.background-color]= "getHoverContacto()==true  ? '#00AEEA' : 'transparent' " [style.color]= "getHoverContacto()==true ? 'white' : '#00AEEA'" style="background-color: transparent; color: #00AEEA;"(click)="this.contacto()">Contacto</button>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="mostrarBotonesWeb()">
+  <button [ngStyle]="navegationEmpresa()" class="col-md-4" id="empresa" [style.background-color]= "getHoverEmpresa()==true  ? '#00AEEA' : 'transparent' " [style.color]= "getHoverEmpresa()==true ? 'white' : '#00AEEA'" style="background-color: transparent; color: #00AEEA;" (click)="this.empresa()">Empresa</button>
+
+
+   <button [ngStyle]="navegationProductos()" class="col-md-4" id="productos" [style.background-color]= "getHoverProductos()==true  ? '#00AEEA' : 'transparent' " [style.color]= "getHoverProductos()==true ? 'white' : '#00AEEA'" style="background-color: transparent; color: #00AEEA;"  (click)="this.productos()">Productos</button>
+
+
+   <button [ngStyle]="navegationContacto()" class="col-md-4" id="contacto" [style.background-color]= "getHoverContacto()==true  ? '#00AEEA' : 'transparent' " [style.color]= "getHoverContacto()==true ? 'white' : '#00AEEA'" style="background-color: transparent; color: #00AEEA;" (click)="this.contacto()">Contacto</button>
+ </div>
+

@@ -1,0 +1,68 @@
+<div *ngIf="appService.getAppView()" class="container-fluid">
+<div
+  id="contenedorProductos"
+  class="row"
+>
+  <div class="col-md-4" id="categorias">
+    <div class="" *ngFor="let boton of getCategoriaUrl(); index as i">
+      <button
+        class="btn btn-outline-primary"
+        (click)="elegirCategoria(boton.codigo)"
+      >
+        {{ boton.categoria }}
+      </button>
+    </div>
+  </div>
+
+
+  <div class="col-md-8" id="tarjetaContenedor">
+    <div
+      style="width: 100%;"
+      *ngFor="
+        let producto of getProductoUrl()
+          | paginate: { itemsPerPage: 6, currentPage: getPageActual() };
+        index as i
+      "
+    >
+      <div
+       [ngStyle]="productosResponsive()"
+        *ngIf="checkCategoria(producto.categoria.id)"
+      >
+        <div class="card" style="width: 100%;">
+          <img
+            [attr.src]="producto.foto"
+            class="card-img-top"
+            alt="..."
+            style="width: 100%;"
+          />
+          <div class="card-body">
+            <h5 class="card-title" style="font-size: 3rem;">
+              {{ producto.producto }}
+            </h5>
+            <p class="card-text" style="font-size: 2rem;">
+              {{ producto.descripcion }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<pagination-controls
+*ngIf="appService.getAppView()"
+  style="text-align: center; font-size: 1.5rem;"
+  (pageChange)="cargarPagina($event)"
+  ></pagination-controls>
+  <ngx-spinner
+  *ngIf="appService.getAppView()"
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 2rem; color: white">Loading...</p>
+</ngx-spinner>

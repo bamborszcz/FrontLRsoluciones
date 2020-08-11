@@ -1,0 +1,14 @@
+#contenedorPrincipal{
+  width: 100%;
+  border: 1px solid blue;
+  background-image: url('../assets/background/pngtree-blue-background-bubble-water-drops-background-picture-image_264141.jpg');
+}
+
+
+.contenedorGeneral {
+  width: 100%;
+  border: 1px solid red;
+}
+
+
+

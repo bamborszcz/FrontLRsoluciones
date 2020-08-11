@@ -1,0 +1,14 @@
+#contenedorHead {
+  width: 100%;
+  border: 2px solid brown;
+  padding: 0px;
+  margin: 0px;
+
+}
+
+img{
+  width: 100%;
+  border: 2px solid blue;
+  height: 20rem;
+
+}

@@ -1,0 +1,81 @@
+
+<div style="text-align: center; width: 100%; border: 2px solid red;" *ngIf="appService.getAppView()">
+<div class="card" id="contForm" [ngStyle]="contactoResponsive()">
+  <div class="card-body">
+<form (submit)="enviarForm()" [formGroup]="registerForm">
+    <div class="d-flex justify-content-center">
+
+       <i [ngStyle]="iconoResponsive()" class="fas fa-comments"></i>
+
+        <h1 class="mt-1 ml-2" style="display: inline-block; border: 2px solid blue; color: #00AEEA;">Contactanos</h1>
+
+    </div>
+    <div class="mt-2" style="border: 2px solid black;">
+      <div class="form-group">
+      <input
+      formControlName="nombre"
+        type="text"
+        class="form-control"
+        placeholder="Nombre y Apellido"
+      />
+    </div>
+    <div class="form-group">
+      <input
+      formControlName="mail"
+        type="email"
+        class="form-control"
+        placeholder="Email"
+      />
+    </div>
+    <div class="form-group">
+      <input
+      formControlName="telefono"
+        type="tel"
+        class="form-control"
+        placeholder="Teléfono"
+
+      />
+    </div><div class="form-group">
+      <input
+      formControlName="localidad"
+        type="text"
+        class="form-control"
+        placeholder="Localidad"
+
+      />
+    </div><div class="form-group">
+      <input
+      formControlName="provincia"
+        type="text"
+        class="form-control"
+        placeholder="Provincia"
+
+      />
+    </div>
+    </div>
+
+    <div  class="form-group">
+      <textarea
+      formControlName="comentario"
+      class="form-control" placeholder="Comentario" style="width: 100%; height: 10rem;" required></textarea>
+    </div>
+
+    <div>
+      <re-captcha
+       (resolved)="resolved($event)" siteKey="6Lezgv0UAAAAAFtXxqUar0N-9bfR0akRAr52vGo_
+    "> <!--IMPORTANTE ESATO ES EL GRAFICO, EL RECAPCHA DEBE VALIDARCE DEL LADO DEL SERVIDOR PARA QUE FUNCIONE--></re-captcha>
+    </div>
+
+
+    <div class="d-flex justify-content-center mt-3">
+          <button  [ngStyle]="enviarResponsive()" type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+  </form>
+  </div>
+
+</div>
+</div>
+
+
+
+

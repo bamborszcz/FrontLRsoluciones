@@ -1,0 +1,16 @@
+example-button-row {
+  display: table-cell;
+}
+
+.example-button-row button {
+  display: table-cell;
+  margin-right: 8px;
+  background-color: #00AEEA;
+  outline: none;
+  border: 0;
+}
+
+
+div {
+  margin-top: 2.5%;
+}

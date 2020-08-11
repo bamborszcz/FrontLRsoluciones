@@ -1,0 +1,26 @@
+#contForm {
+  border: 2px solid blue;
+}
+img {
+  width: 5%;
+}
+
+h1 {
+  color: #555555;
+}
+
+button {
+  background-color: #00AEEA;
+  border-color: #00AEEA;
+  font-size: 2rem;
+  border-radius: 35%;
+  width: 30%;
+}
+
+.card {
+  opacity: 0.6;
+  -webkit-box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+
+}
