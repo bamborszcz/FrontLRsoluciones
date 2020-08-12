@@ -1,4 +1,4 @@
-<form class="container mt-5" style="border: 2px solid blue">
+<form class="container mt-5" style="border: 2px solid blue" [formGroup]="registerForm2">
   <div class="d-flex justify-content-center" style="border: 2px solid red">
     <mat-form-field style="width: 30%;">
       <mat-label>Subir Archivos</mat-label>
@@ -15,14 +15,15 @@
       <mat-label>Categoria</mat-label>
       <input
         matInput
-        [formControl]=""
+        formControlName="categoria"
+        class="form-control"
         [errorStateMatcher]="matcher"
         placeholder="Escriba su Categoria"
       />
     </mat-form-field>
   </div>
 
-  <div class="d-flex justify-content-center">
+  <div *ngIf="this.select()" class="d-flex justify-content-center">
     <mat-form-field style="width: 30%;">
       <mat-label>Producto</mat-label>
       <input
@@ -34,7 +35,7 @@
     </mat-form-field>
   </div>
 
-  <div class="d-flex justify-content-center">
+  <div *ngIf="this.select()" class="d-flex justify-content-center">
     <mat-form-field style="width: 30%;">
       <mat-label>Descripcion</mat-label>
       <textarea
@@ -46,7 +47,7 @@
     </mat-form-field>
   </div>
 
-<div class="d-flex justify-content-center" style="border: 2px solid red">
+<div *ngIf="this.select()" class="d-flex justify-content-center" style="border: 2px solid red">
   <button mat-raised-button  (click)="onClick()" style=" outline: none;
   border: 0;">
     <mat-icon  class="fas fa-cloud-upload-alt" style="width: auto; height: 3rem;  color: #00AEEA;"></mat-icon>{{" "+text}}</button>

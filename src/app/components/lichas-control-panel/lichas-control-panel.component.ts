@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit  } from '@angular/core';
 import { AppService } from 'src/app/service/app.service';
 import { LichasControlPanelService } from 'src/app/service/lichas-control-panel.service';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm} from '@angular/forms';
@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { FileUploadModel } from 'src/app/models/fileUploadModel';
 
 import { UploadFileService } from 'src/app/service/upload-file.service';
+import { CategoriaService } from 'src/app/service/categoria.service';
 
 
 @Component({
@@ -36,20 +37,34 @@ export class LichasControlPanelComponent implements ErrorStateMatcher {
   // form control
   toppings = new FormControl();
   toppingList: string[] = ['Categoria', 'Footer', 'Portada Celular', 'Portada PC', 'Producto'];
-  registerForm: FormGroup;
+  registerForm: FormGroup = null;
   registerForm2: FormGroup;
 
-  constructor(public appService: AppService, public lichaPanel: LichasControlPanelService, private http: HttpClient, private upLoadServ: UploadFileService, private formBuilder: FormBuilder) {
+  constructor(public appService: AppService, public lichaPanel: LichasControlPanelService, private http: HttpClient, private upLoadServ: UploadFileService, private formBuilder: FormBuilder, private cateServ: CategoriaService) {
 
     this.appService.setAppView(false);
     this.lichaPanel.setLichaPanel(true);
+
    }
 
+   ngOnInit(): void {
+     this.registerForm2 = this.formLoad('Categoria');
+  }
 //////////////formulario////////////////////////////////////////////////////////
 
+public select(): boolean {
+  let select = true;
+  if (this.toppings.value !== null) {
+    if (this.toppings.value[0]!=='Producto') {
+    select = false;
+  }
+  }
+  return select;
+}
 public formLoad(select: string): FormGroup {
 
  switch(select) {
+
       case "Categoria": {
 
          this.registerForm = this.formBuilder.group({// deben ser igual a los de la interfaz
@@ -169,8 +184,11 @@ public formLoad(select: string): FormGroup {
 
   basic(){
     this.uploadFiles();
-    console.log(this.toppings.value);
+    console.log(this.toppings.value.length);
     this.registerForm2 = this.formLoad("");
+    this.cateServ.sendCategoria(this.formLoad(this.toppings.value).value).toPromise().then((data: any) => {
+      console.log(data);
 
+    });
   }
 }
