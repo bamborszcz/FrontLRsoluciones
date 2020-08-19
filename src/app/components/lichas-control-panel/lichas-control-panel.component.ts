@@ -9,6 +9,7 @@ import { FileUploadModel } from 'src/app/models/fileUploadModel';
 
 import { UploadFileService } from 'src/app/service/upload-file.service';
 import { CategoriaService } from 'src/app/service/categoria.service';
+import { FooterService } from 'src/app/service/footer.service';
 
 
 @Component({
@@ -38,19 +39,46 @@ export class LichasControlPanelComponent implements ErrorStateMatcher {
   toppings = new FormControl();
   toppingList: string[] = ['Categoria', 'Footer', 'Portada Celular', 'Portada PC', 'Producto'];
   registerForm: FormGroup = null;
-  registerForm2: FormGroup;
-
-  constructor(public appService: AppService, public lichaPanel: LichasControlPanelService, private http: HttpClient, private upLoadServ: UploadFileService, private formBuilder: FormBuilder, private cateServ: CategoriaService) {
+  public categoria: string;
+  constructor(public appService: AppService, public lichaPanel: LichasControlPanelService, private http: HttpClient, private upLoadServ: UploadFileService, private formBuilder: FormBuilder, private cateServ: CategoriaService, private footer: FooterService) {
 
     this.appService.setAppView(false);
     this.lichaPanel.setLichaPanel(true);
 
+    //this.registerForm2 = this.formLoad(this.toppings.value[0]);
    }
 
+   registerForm2 = this.formBuilder.group({// deben ser igual a los de la interfaz
+    codigo: [],
+    categoria: [''],
+    foto: ['']
+  });
+
    ngOnInit(): void {
-     this.registerForm2 = this.formLoad('Categoria');
+/*
+    console.log("inicio");
+    this.registerForm2 = this.formBuilder.group({});
+    console.log(this.registerForm2);
+    console.log(this.registerForm2.value);
+     //this.registerForm2 = this.formLoad('Categoria');
+
+     console.log(this.registerForm2);
+     console.log(this.registerForm2.value);
+     //this.registerForm2 = this.formLoad('Footer');
+
+     console.log(this.registerForm2);
+     console.log(this.registerForm2.value);
+     //this.registerForm2 = this.formBuilder.group({});*/
   }
 //////////////formulario////////////////////////////////////////////////////////
+
+public getReg (): FormGroup {
+return this.registerForm2;
+}
+public setReg (reg: FormGroup) {
+
+  this.registerForm2 = reg;
+  }
 
 public select(): boolean {
   let select = true;
@@ -61,16 +89,19 @@ public select(): boolean {
   }
   return select;
 }
-public formLoad(select: string): FormGroup {
+/*public formLoad(select: string): FormGroup {
 
  switch(select) {
 
       case "Categoria": {
 
          this.registerForm = this.formBuilder.group({// deben ser igual a los de la interfaz
-          codigo: [],
-          categoria: ['']
+         // codigo: new FormControl(),
+          //categoria: new FormControl(),
+        //  codigo: [],
+         // categoria: ['']
   });
+  this.categoria = "categoria"
          break;
       }
       case "Footer": {
@@ -79,6 +110,7 @@ public formLoad(select: string): FormGroup {
           codigo: [],
           foto: ['']
  });
+ this.registerForm2 = this.registerForm;
         break;
      }
 
@@ -116,11 +148,10 @@ public formLoad(select: string): FormGroup {
 });
   break;
 }
+
     }
-
-
   return this.registerForm;
-}
+}*/
 
 //////////////////////////////////////////////////////////////////////////////////////
    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -181,14 +212,50 @@ public formLoad(select: string): FormGroup {
 }
 
 
+public getForm(){
+ // this.registerForm2 = this.formBuilder.group({});
+//console.log(this.registerForm2.value);
+console.log("algo");
+
+
+  //this.registerForm2 = this.formLoad(this.toppings.value[0]);
+ // this.setReg(this.formLoad(this.toppings.value[0]));
+//console.log("lala"+this.toppings.value[0]);
+//console.log(this.registerForm2.value);
+
+//console.log(this.getReg().value);
+
+/*this.registerForm = this.formBuilder.group({// deben ser igual a los de la interfaz
+  // codigo: new FormControl(),
+   //categoria: new FormControl(),
+  codigo: [],
+   categoria: ['']
+});
+
+this.setReg(this.registerForm);*/
+}
 
   basic(){
     this.uploadFiles();
-    console.log(this.toppings.value.length);
-    this.registerForm2 = this.formLoad("");
-    this.cateServ.sendCategoria(this.formLoad(this.toppings.value).value).toPromise().then((data: any) => {
+    console.log(this.toppings.value[0]);
+
+    //this.registerForm2 = this.formBuilder.group({});
+console.log(this.registerForm2.value);
+
+if (this.toppings.value[0] === 'Categoria') {
+this.cateServ.sendCategoria(this.getReg().value).toPromise().then((data: any) => {
       console.log(data);
 
+
     });
+} else if(this.toppings.value[0] === 'Footer') {
+  this.footer.sendFooter(this.getReg().value).toPromise().then((data: any) => {
+    console.log(data);
+
+
+  });
+}
+    //this.registerForm2 = this.formLoad(this.toppings.value[0]);
+
   }
 }

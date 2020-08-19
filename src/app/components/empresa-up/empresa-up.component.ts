@@ -6,12 +6,9 @@ import { AppService } from 'src/app/service/app.service';
   templateUrl: './empresa-up.component.html',
   styleUrls: ['./empresa-up.component.css']
 })
-export class EmpresaUPComponent implements OnInit {
+export class EmpresaUPComponent {
 
   constructor( public appService: AppService ) { }
-
-  ngOnInit(): void {
-  }
 
 
 }

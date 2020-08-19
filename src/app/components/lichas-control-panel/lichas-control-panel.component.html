@@ -1,9 +1,9 @@
-<form class="container mt-5" style="border: 2px solid blue" [formGroup]="registerForm2">
+<form class="container mt-5" style="border: 2px solid blue" [formGroup]="getReg()">
   <div class="d-flex justify-content-center" style="border: 2px solid red">
     <mat-form-field style="width: 30%;">
       <mat-label>Subir Archivos</mat-label>
-      <mat-select [formControl]="toppings" multiple>
-        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
+      <mat-select [formControl]="toppings" multiple (selectionChange)="getForm()">
+        <mat-option *ngFor="let topping of toppingList" [value]="topping" >{{
           topping
         }}</mat-option>
       </mat-select>
@@ -19,6 +19,19 @@
         class="form-control"
         [errorStateMatcher]="matcher"
         placeholder="Escriba su Categoria"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex justify-content-center" style="border: 2px solid red">
+    <mat-form-field style="width: 30%;">
+      <mat-label>Footer</mat-label>
+      <input
+        matInput
+        formControlName="foto"
+        class="form-control"
+        [errorStateMatcher]="matcher"
+        placeholder="Escriba su Foto"
       />
     </mat-form-field>
   </div>

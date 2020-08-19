@@ -18,4 +18,12 @@ export class FooterService {
    return this.http.get<FooterUrl>('http://127.0.0.1:8080/footerImg/');
 
   }
+
+  public sendFooter(footer: FooterUrl): Observable<any> {
+    return this.http.post<FooterUrl>('http://127.0.0.1:8080/footerImg', {// antes debo pasarle el capcha por parametro, la variable es "g-recaptcha-response"
+    codigo: footer.codigo,
+    foto: footer.foto
+    });
+
+   }
 }
